@@ -11,6 +11,7 @@ public:
 	GazeFilters(int _filterTypeSelected, int _gazeBufferSize, int _waBufferSize, double _CursorJumpThresholdNormalized);
 	PointD filterGazeData(PointD GazePoint);
 	~GazeFilters();
+	enum filtertype { meanMedian, average, wa };
 
 private:
 	PointD getMeanMedianGazeFiltered(PointD GazePoint);
@@ -22,8 +23,7 @@ private:
 	void clearBuffers();
 	void clearBuffersWA();
 
-private:
-	enum filtertype { meanMedian, average, wa };	
+private:	
 	filtertype filterTypeSelected;
 	int gazeBufferSize;
 	int waBufferSize;
