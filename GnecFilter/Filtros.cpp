@@ -82,12 +82,15 @@ void filter6::filter(double &x, double &y)
 
 
 filter7::filter7()
-{}
+{
+	headFilter3 = new HeadFilter3(800,1200);
+}
 
 void filter7::filter(double &x, double &y)
 {
-	x = 500;
-	y = 700;
+	headFilter3->initializeHeadFilter(800, 1200);
+	x = headFilter3->headFilterX(x);
+	y = headFilter3->headFilterY(y);
 }
 
 
