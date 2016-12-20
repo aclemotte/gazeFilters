@@ -95,12 +95,12 @@ public:
 	// methods for headfilter1
 	void initializeMatrixes(void);
 	MatrixXd  initializeMatrixes2Zero(MatrixXd M, int m, int n);
-	void  initializeHeadFilter(float screenWitdh, float screenHeight, double cov_omega, double cov_nu);
+	void  initializeHeadFilter(double cov_omega, double cov_nu);
 	float  headFilterX(double inputX);
 	float  headFilterY(double inputY);
 
-
-	HeadFilter3(float width, float height, double cov_omega, double cov_nu);
+	HeadFilter3();
+	HeadFilter3(double cov_omega, double cov_nu);
 	HeadFilter3(const HeadFilter3 &obj);
 	~HeadFilter3(void);
 

@@ -6,11 +6,14 @@
 using namespace std;
 using namespace Eigen;
 
-HeadFilter3::HeadFilter3(float width, float height, double cov_omega, double cov_nu)
+HeadFilter3::HeadFilter3()
 {
+}
 
+HeadFilter3::HeadFilter3(double cov_omega, double cov_nu)
+{
 	initializeMatrixes();
-	initializeHeadFilter(width, height, cov_omega, cov_nu);
+	initializeHeadFilter(cov_omega, cov_nu);
 }
 
 HeadFilter3::HeadFilter3(const HeadFilter3 &obj)
@@ -95,7 +98,7 @@ MatrixXd HeadFilter3::initializeMatrixes2Zero(MatrixXd M, int m, int n)
 	return M;
 }
 
-void HeadFilter3::initializeHeadFilter(float screenWitdh, float screenHeight, double cov_omega, double cov_nu)
+void HeadFilter3::initializeHeadFilter(double cov_omega, double cov_nu)
 {
 	enlazaSetup.sampFreq = 50;
 	enlazaSetup.kalman_b = 0.3f;
@@ -103,8 +106,6 @@ void HeadFilter3::initializeHeadFilter(float screenWitdh, float screenHeight, do
 	enlazaSetup.lateralControl = false;
 	enlazaSetup.verticalRange = 20;
 	enlazaSetup.horizontalRange = 30;
-	enlazaSetup.screenheight = screenHeight;
-	enlazaSetup.screenWidth = screenWitdh;
 
 	// initialize matrix (2/2)
 	

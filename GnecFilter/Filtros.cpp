@@ -83,13 +83,13 @@ void filter6::filter(double &x, double &y)
 
 filter7::filter7()
 {
-	headFilter3 = new HeadFilter3(800, 1200, 20, 10);
+	headFilter3 = new HeadFilter3();
 }
 
 void filter7::filter(double &x, double &y)
 {
-	// initializeHeadFilter(altoPantalla, anchoPantalla, cov_omega, cov_nu);
-	headFilter3->initializeHeadFilter(800, 1200, 20,10);
+	// initializeHeadFilter(cov_omega, cov_nu);
+	headFilter3->initializeHeadFilter(20,10);
 	x = headFilter3->headFilterX(x);
 	y = headFilter3->headFilterY(y);
 }
