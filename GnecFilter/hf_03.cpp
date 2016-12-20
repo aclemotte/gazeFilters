@@ -6,11 +6,11 @@
 using namespace std;
 using namespace Eigen;
 
-HeadFilter3::HeadFilter3(float width, float height)
+HeadFilter3::HeadFilter3(float width, float height, double cov_omega, double cov_nu)
 {
 
 	initializeMatrixes();
-	initializeHeadFilter(width, height);
+	initializeHeadFilter(width, height, cov_omega, cov_nu);
 }
 
 HeadFilter3::HeadFilter3(const HeadFilter3 &obj)
@@ -95,7 +95,7 @@ MatrixXd HeadFilter3::initializeMatrixes2Zero(MatrixXd M, int m, int n)
 	return M;
 }
 
-void HeadFilter3::initializeHeadFilter(float screenWitdh, float screenHeight)
+void HeadFilter3::initializeHeadFilter(float screenWitdh, float screenHeight, double cov_omega, double cov_nu)
 {
 	enlazaSetup.sampFreq = 50;
 	enlazaSetup.kalman_b = 0.3f;
@@ -181,9 +181,9 @@ void HeadFilter3::initializeHeadFilter(float screenWitdh, float screenHeight)
 	myMatrixSet.Hy(0, 0) = 1;
 	myMatrixSet.Hy(0, 1) = 0;
 
-	// pasar a argumentos de entrada!!!
-	cov_omega = 50;		// Predicción Cuanto más alto menos filtra
-	cov_nu = 10;		// Medida
+	//// pasar a argumentos de entrada!!!
+	//cov_omega = 50;		// Predicción Cuanto más alto menos filtra
+	//cov_nu = 10;		// Medida
 
 	myMatrixSet.I2(0, 0) = 1;
 	myMatrixSet.I2(0, 1) = 0;

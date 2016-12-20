@@ -10,8 +10,8 @@ using Eigen::Array;
 class HeadFilter3
 {
 public:
-	double cov_omega;
-	double cov_nu;
+	//double cov_omega;
+	//double cov_nu;
 	double Ts, bx, by;
 	
 private:
@@ -95,12 +95,12 @@ public:
 	// methods for headfilter1
 	void initializeMatrixes(void);
 	MatrixXd  initializeMatrixes2Zero(MatrixXd M, int m, int n);
-	void  initializeHeadFilter(float screenWitdh, float screenHeight);
+	void  initializeHeadFilter(float screenWitdh, float screenHeight, double cov_omega, double cov_nu);
 	float  headFilterX(double inputX);
 	float  headFilterY(double inputY);
 
 
-	HeadFilter3(float width, float height);
+	HeadFilter3(float width, float height, double cov_omega, double cov_nu);
 	HeadFilter3(const HeadFilter3 &obj);
 	~HeadFilter3(void);
 
