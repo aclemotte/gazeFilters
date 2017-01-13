@@ -1,5 +1,5 @@
-#include "Filtros.h"
 #include <iostream>
+#include "Filtros.h"
 #include "PointD.h"
 
 using namespace std;
@@ -7,13 +7,11 @@ using namespace std;
 
 filter1::filter1()
 {
-	gazeFilter = new GazeFilters();
+	gazeFilter = new GazeFilters(GazeFilters::filtertype::wa, 10, 50, 250);
 }
-
+	
 void filter1::filter(double &x, double &y)
 {
-	//x = 500;
-	//y = 100;
 	PointD dataFiltered = gazeFilter->filterGazeData(PointD(x, y));
 	x = dataFiltered.X;
 	y = dataFiltered.Y;
@@ -22,12 +20,15 @@ void filter1::filter(double &x, double &y)
 
 
 filter2::filter2()
-{}
+{
+	gazeFilter = new GazeFilters(GazeFilters::filtertype::average, 10, 50, 250);
+}
 
 void filter2::filter(double &x, double &y)
 {
-	x = 500;
-	y = 200;
+	PointD dataFiltered = gazeFilter->filterGazeData(PointD(x, y));
+	x = dataFiltered.X;
+	y = dataFiltered.Y;
 }
 
 

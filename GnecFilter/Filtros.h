@@ -26,6 +26,9 @@ class FILTER_API filter2
 public:
 	filter2();
 	void filter(double &x, double &y);
+
+private: 
+	GazeFilters* gazeFilter;
 };
 
 class FILTER_API filter3
