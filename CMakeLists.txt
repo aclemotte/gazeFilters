@@ -18,6 +18,8 @@ SET (SRC GnecFilter/Filtros.h
 		 GnecFilter/hf_01.cpp 
 		 GnecFilter/hf_02.h
 		 GnecFilter/hf_02.cpp 
+		 GnecFilter/hf_03.h
+		 GnecFilter/hf_03.cpp 
 		 GnecFilter/PointD.h
 		 GnecFilter/PointD.cpp 
 	)
