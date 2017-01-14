@@ -1,5 +1,4 @@
 #include "GazeFilters.h"
-#include <queue>
 #include <iostream>
 using namespace std;
 
@@ -9,7 +8,7 @@ GazeFilters::GazeFilters()
 	filterTypeSelected = filtertype::wa;
 	gazeBufferSize = 10;
 	waBufferSize = 50;	
-	CursorJumpThresholdNormalized = 250;
+	gazeStateClassifier.CursorJumpThresholdNormalized = 250;
 }
 
 GazeFilters::GazeFilters(int _filterTypeSelected, int _gazeBufferSize, int _waBufferSize, double _CursorJumpThresholdNormalized)
@@ -17,7 +16,7 @@ GazeFilters::GazeFilters(int _filterTypeSelected, int _gazeBufferSize, int _waBu
 	filterTypeSelected = filtertype(_filterTypeSelected);
 	gazeBufferSize = _gazeBufferSize;
 	waBufferSize = _waBufferSize;	
-	CursorJumpThresholdNormalized = _CursorJumpThresholdNormalized;
+	gazeStateClassifier.CursorJumpThresholdNormalized = _CursorJumpThresholdNormalized;
 }
 
 GazeFilters::~GazeFilters()
@@ -30,7 +29,7 @@ PointD GazeFilters::filterGazeData(PointD GazePoint)
 		return GazePoint;
 	else
 	{
-		if (gazeFix1(GazePoint))
+		if (gazeStateClassifier.gazeFix1(GazePoint, lastFilterReturn))
 		{
 			if (filterTypeSelected == filtertype::meanMedian)
 				lastFilterReturn = getMeanMedianGazeFiltered(GazePoint);
@@ -129,14 +128,6 @@ PointD GazeFilters::getWA(PointD GazePoint)
 	return gazeFiltered;
 }
 
-
-bool GazeFilters::gazeFix1(PointD GazePoint)
-{
-	if (PointD::distance(GazePoint, lastFilterReturn) < CursorJumpThresholdNormalized)
-		return true;
-	else
-		return false;
-}
 
 void GazeFilters::addPointD2Buffer(PointD GazePoint)
 {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PointD.h"
+#include "GazeStateClassifier.h"
 #include <queue>
 using namespace std;
 
@@ -22,16 +23,19 @@ private:
 	void addPointD2BufferWA(PointD GazePoint);
 	void clearBuffers();
 	void clearBuffersWA();
+	GazeStateClassifier gazeStateClassifier;
 
 private:	
 	filtertype filterTypeSelected;
 	int gazeBufferSize;
 	int waBufferSize;
-	double CursorJumpThresholdNormalized;
 
-	PointD lastFilterReturn;
 	deque<double> GazeBufferX;
 	deque<double> GazeBufferY;
 	deque<double> WaBufferX;
 	deque<double> WaBufferY;
+
+	//double CursorJumpThresholdNormalized;
+	PointD lastFilterReturn;
+
 };
