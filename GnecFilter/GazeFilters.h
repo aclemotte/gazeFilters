@@ -20,9 +20,7 @@ private:
 	PointD getWA(PointD GazePoint);
 	bool gazeFix1(PointD GazePoint);
 	void addPointD2Buffer(PointD GazePoint);
-	void addPointD2BufferWA(PointD GazePoint);
 	void clearBuffers();
-	void clearBuffersWA();
 	GazeStateClassifier gazeStateClassifier;
 
 private:	
@@ -32,10 +30,7 @@ private:
 
 	deque<double> GazeBufferX;
 	deque<double> GazeBufferY;
-	deque<double> WaBufferX;
-	deque<double> WaBufferY;
 
-	//double CursorJumpThresholdNormalized;
 	PointD lastFilterReturn;
 
 };

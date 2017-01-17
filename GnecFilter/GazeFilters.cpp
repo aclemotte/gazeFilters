@@ -43,13 +43,14 @@ PointD GazeFilters::filterGazeData(PointD GazePoint)
 		else
 		{
 			//lastFilterReturn = GazePoint;
-			//clearBuffers();
 			lastFilterReturn = getMovingAverageGaze(GazePoint);
-			clearBuffersWA();
+			clearBuffers();
 		}
 		return lastFilterReturn;
 	}
 }
+
+
 
 PointD GazeFilters::getMeanMedianGazeFiltered(PointD GazePoint)
 {
@@ -114,19 +115,22 @@ PointD GazeFilters::getMovingAverageGaze(PointD GazePoint)
 
 PointD GazeFilters::getWA(PointD GazePoint)
 {
-	addPointD2BufferWA(GazePoint);
+	addPointD2Buffer(GazePoint);
 	
 	double pxf = 0;
 	double pyf = 0;
-	double qlen = WaBufferX.size();
+	double qlen = GazeBufferX.size();
+
 	for (int i = 0; i<qlen; i++) {
-		pxf += WaBufferX.at(i) * (qlen - i) / (qlen*(qlen + 1) / 2);
-		pyf += WaBufferY.at(i) * (qlen - i) / (qlen*(qlen + 1) / 2);
+		pxf += GazeBufferX.at(i) * (qlen - i) / (qlen*(qlen + 1) / 2);
+		pyf += GazeBufferY.at(i) * (qlen - i) / (qlen*(qlen + 1) / 2);
 	}
 	
 	PointD gazeFiltered(pxf,pyf);
 	return gazeFiltered;
 }
+
+
 
 
 void GazeFilters::addPointD2Buffer(PointD GazePoint)
@@ -141,26 +145,8 @@ void GazeFilters::addPointD2Buffer(PointD GazePoint)
 	GazeBufferY.push_front(GazePoint.Y);
 }
 
-void GazeFilters::addPointD2BufferWA(PointD GazePoint)
-{
-	if (WaBufferX.size() >= waBufferSize)
-	{
-		WaBufferX.pop_back();
-		WaBufferY.pop_back();
-	}
-
-	WaBufferX.push_front(GazePoint.X);
-	WaBufferY.push_front(GazePoint.Y);
-}
-
 void GazeFilters::clearBuffers()
 {
 	GazeBufferX.clear(); 
 	GazeBufferY.clear();
-}
-
-void GazeFilters::clearBuffersWA()
-{
-	WaBufferX.clear();
-	WaBufferY.clear();
 }
