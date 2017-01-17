@@ -14,22 +14,26 @@ public:
 	~GazeFilters();
 	enum filtertype { meanMedian, average, wa };
 
-private:
+private://funciones
 	PointD getMeanMedianGazeFiltered(PointD GazePoint);
-	PointD getMovingAverageGaze(PointD GazePoint);
+	PointD getAverageGaze(PointD GazePoint);
 	PointD getWA(PointD GazePoint);
 	bool gazeFix1(PointD GazePoint);
 	void addPointD2Buffer(PointD GazePoint);
+	void addPointD2BufferWA(PointD GazePoint);
 	void clearBuffers();
-	GazeStateClassifier gazeStateClassifier;
+	void clearBuffersWA();
 
-private:	
+private://variables
+	GazeStateClassifier gazeStateClassifier;
 	filtertype filterTypeSelected;
 	int gazeBufferSize;
 	int waBufferSize;
 
 	deque<double> GazeBufferX;
 	deque<double> GazeBufferY;
+	deque<double> WaBufferX;
+	deque<double> WaBufferY;
 
 	PointD lastFilterReturn;
 
