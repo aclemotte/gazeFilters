@@ -3,6 +3,7 @@
 
 BufferPointD::BufferPointD()
 {
+	clearBuffer();
 }
 
 BufferPointD::~BufferPointD()
@@ -15,45 +16,46 @@ BufferPointD::~BufferPointD()
 //no hace lo que dice, falta hacer el sort
 PointD BufferPointD::getMeanMedianBuffer(PointD GazePoint)
 {
-	addPointD2Buffer(GazePoint);
+	//addPointD2Buffer(GazePoint);
 
-	//deben existir al menos tres puntos en el buffer para hacer lo siguiente
-	if (GazeBufferX.size() > 2)
-	{
-		PointD gazeFiltered;
-		//si es par el promedio de los 4 centrales
-		//si es impar se promedia el del medio con sus vecinos
+	////deben existir al menos tres puntos en el buffer para hacer lo siguiente
+	//if (GazeBufferX.size() > 2)
+	//{
+	//	PointD gazeFiltered;
+	//	//si es par el promedio de los 4 centrales
+	//	//si es impar se promedia el del medio con sus vecinos
 
-		if (GazeBufferX.size() % 2 == 0)//si es par
-		{
-			gazeFiltered.X = (
-				GazeBufferX[(GazeBufferX.size() / 2) - 2] +
-				GazeBufferX[(GazeBufferX.size() / 2) - 1] +
-				GazeBufferX[(GazeBufferX.size() / 2) + 0] +
-				GazeBufferX[(GazeBufferX.size() / 2) + 1]) / 4;
-			gazeFiltered.Y = (
-				GazeBufferY[(GazeBufferX.size() / 2) - 2] +
-				GazeBufferY[(GazeBufferX.size() / 2) - 1] +
-				GazeBufferY[(GazeBufferX.size() / 2) + 0] +
-				GazeBufferY[(GazeBufferX.size() / 2) + 1]) / 4;
-		}
-		else//si es impar
-		{
-			gazeFiltered.X = (
-				GazeBufferX[(GazeBufferX.size() / 2) - 1] +
-				GazeBufferX[(GazeBufferX.size() / 2) + 0] +
-				GazeBufferX[(GazeBufferX.size() / 2) + 1]) / 3;
-			gazeFiltered.Y = (
-				GazeBufferY[(GazeBufferX.size() / 2) - 1] +
-				GazeBufferY[(GazeBufferX.size() / 2) + 0] +
-				GazeBufferY[(GazeBufferX.size() / 2) + 1]) / 3;
-		}
-		return gazeFiltered;
-	}
-	else //si el buffer tiene menos de 3 elementos, se devuelve el argumento
-	{
-		return GazePoint;
-	}
+	//	if (GazeBufferX.size() % 2 == 0)//si es par
+	//	{
+	//		gazeFiltered.X = (
+	//			GazeBufferX[(GazeBufferX.size() / 2) - 2] +
+	//			GazeBufferX[(GazeBufferX.size() / 2) - 1] +
+	//			GazeBufferX[(GazeBufferX.size() / 2) + 0] +
+	//			GazeBufferX[(GazeBufferX.size() / 2) + 1]) / 4;
+	//		gazeFiltered.Y = (
+	//			GazeBufferY[(GazeBufferX.size() / 2) - 2] +
+	//			GazeBufferY[(GazeBufferX.size() / 2) - 1] +
+	//			GazeBufferY[(GazeBufferX.size() / 2) + 0] +
+	//			GazeBufferY[(GazeBufferX.size() / 2) + 1]) / 4;
+	//	}
+	//	else//si es impar
+	//	{
+	//		gazeFiltered.X = (
+	//			GazeBufferX[(GazeBufferX.size() / 2) - 1] +
+	//			GazeBufferX[(GazeBufferX.size() / 2) + 0] +
+	//			GazeBufferX[(GazeBufferX.size() / 2) + 1]) / 3;
+	//		gazeFiltered.Y = (
+	//			GazeBufferY[(GazeBufferX.size() / 2) - 1] +
+	//			GazeBufferY[(GazeBufferX.size() / 2) + 0] +
+	//			GazeBufferY[(GazeBufferX.size() / 2) + 1]) / 3;
+	//	}
+	//	return gazeFiltered;
+	//}
+	//else //si el buffer tiene menos de 3 elementos, se devuelve el argumento
+	//{
+	//	return GazePoint;
+	//}
+	return GazePoint;
 }
 
 PointD BufferPointD::getAverageBuffer(PointD GazePoint)
@@ -110,7 +112,7 @@ PointD BufferPointD::getWABuffer(PointD GazePoint)
 
 void BufferPointD::addPointD2Buffer(PointD GazePoint)
 {
-	if (GazeBufferX.size() >= bufferSize)
+	if (GazeBufferX.size() >= maxBufferSize)
 	{
 		GazeBufferX.pop_back();
 		GazeBufferY.pop_back();
@@ -124,4 +126,9 @@ void BufferPointD::clearBuffer()
 {
 	GazeBufferX.clear();
 	GazeBufferY.clear();
+}
+
+int BufferPointD::getCurrentBufferSize()
+{
+	return GazeBufferX.size();
 }

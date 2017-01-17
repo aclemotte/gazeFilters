@@ -13,9 +13,10 @@ public:
 	PointD getAverageBuffer(PointD GazePoint);
 	PointD getStdBuffer(PointD avgPoint);
 	PointD getWABuffer(PointD GazePoint);
+	int getCurrentBufferSize();
 	void addPointD2Buffer(PointD GazePoint);
 	void clearBuffer();
-	int bufferSize;
+	int maxBufferSize;
 
 private:
 	deque<double> GazeBufferX;
