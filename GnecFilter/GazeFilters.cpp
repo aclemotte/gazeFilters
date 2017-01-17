@@ -6,21 +6,22 @@ using namespace std;
 GazeFilters::GazeFilters()
 {
 	filterTypeSelected = filtertype::wa;
-	GazeBuffer.bufferSize = 10;
-	WaBuffer.bufferSize = 50;
-	gazeStateClassifier.CursorJumpThresholdNormalized = 250;
+	GazeBuffer.maxBufferSize = 10;
+	WaBuffer.maxBufferSize = 50;
+	gazeStateClassifier.setupGazeFix1(250);
+	gazeStateClassifier.setupGazeFix2(100, 5);
 }
 
 GazeFilters::GazeFilters(int _filterTypeSelected, int _gazeBufferSize, int _waBufferSize, double _CursorJumpThresholdNormalized)
 {
 	filterTypeSelected = filtertype(_filterTypeSelected);
-	GazeBuffer.bufferSize = _gazeBufferSize;
-	WaBuffer.bufferSize = _waBufferSize;
-	gazeStateClassifier.CursorJumpThresholdNormalized = _CursorJumpThresholdNormalized;
+	GazeBuffer.maxBufferSize = _gazeBufferSize;
+	WaBuffer.maxBufferSize = _waBufferSize;
+	gazeStateClassifier.setupGazeFix1(_CursorJumpThresholdNormalized);
+	gazeStateClassifier.setupGazeFix2(100, 5);
 }
 
-GazeFilters::~GazeFilters()
-{}
+GazeFilters::~GazeFilters(){}
 
 PointD GazeFilters::filterGazeData(PointD GazePoint)
 {
@@ -28,10 +29,11 @@ PointD GazeFilters::filterGazeData(PointD GazePoint)
 		return GazePoint;
 	else
 	{
-		if (gazeStateClassifier.gazeFix1(GazePoint, lastFilterReturn))
+		//if (gazeStateClassifier.gazeFix1(GazePoint, lastFilterReturn))
+		if (gazeStateClassifier.gazeFix2(GazePoint))
 		{
 			if (filterTypeSelected == filtertype::meanMedian)
-				lastFilterReturn = GazeBuffer.getMeanMedianBuffer(GazePoint);
+				lastFilterReturn = GazeBuffer.getMeanMedianBuffer(GazePoint);//retorna el argumento
 			if (filterTypeSelected == filtertype::average)
 				lastFilterReturn = GazeBuffer.getAverageBuffer(GazePoint);
 			if (filterTypeSelected == filtertype::wa) {

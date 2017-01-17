@@ -1,7 +1,5 @@
 #pragma once
 
-#include "PointD.h"
-#include "BufferPointD.h"
 #include "GazeStateClassifier.h"
 #include <queue>
 using namespace std;
