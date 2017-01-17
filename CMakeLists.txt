@@ -24,6 +24,8 @@ SET (SRC GnecFilter/Filtros.h
 		 GnecFilter/PointD.cpp 
 		 GnecFilter/GazeStateClassifier.h
 		 GnecFilter/GazeStateClassifier.cpp 
+		 GnecFilter/BufferPointD.h
+		 GnecFilter/BufferPointD.cpp 
 	)
 
 ADD_LIBRARY( ${PROJECT_NAME} SHARED ${SRC} )
