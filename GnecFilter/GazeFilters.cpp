@@ -7,7 +7,7 @@ GazeFilters::GazeFilters()
 {
 	filterTypeSelected = filtertype::wa;
 	gazeBufferSize = 10;
-	waBufferSize = 50;	
+	waBufferSize = 50;
 	gazeStateClassifier.CursorJumpThresholdNormalized = 250;
 }
 
@@ -15,7 +15,7 @@ GazeFilters::GazeFilters(int _filterTypeSelected, int _gazeBufferSize, int _waBu
 {
 	filterTypeSelected = filtertype(_filterTypeSelected);
 	gazeBufferSize = _gazeBufferSize;
-	waBufferSize = _waBufferSize;	
+	waBufferSize = _waBufferSize;
 	gazeStateClassifier.CursorJumpThresholdNormalized = _CursorJumpThresholdNormalized;
 }
 
