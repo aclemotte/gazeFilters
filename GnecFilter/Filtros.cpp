@@ -20,8 +20,7 @@ void filter1::filter(double &x, double &y)
 
 
 
-filter2::filter2()
-{}
+filter2::filter2(){}
 
 void filter2::filter(double &x, double &y)
 {
@@ -43,8 +42,7 @@ void filter3::filter(double &x, double &y)
 
 
 
-filter4::filter4()
-{}
+filter4::filter4(){}
 
 void filter4::filter(double &x, double &y)
 {
@@ -55,8 +53,7 @@ void filter4::filter(double &x, double &y)
 
 
 
-filter5::filter5()
-{}
+filter5::filter5(){}
 
 void filter5::filter(double &x, double &y)
 {
@@ -67,8 +64,7 @@ void filter5::filter(double &x, double &y)
 
 
 
-filter6::filter6()
-{}
+filter6::filter6(){}
 
 void filter6::filter(double &x, double &y)
 {
